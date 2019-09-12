@@ -1,5 +1,7 @@
-#include "lib/
 
+/**
+@author Will Pringle
+*/
 public class main{
 	
 	
@@ -7,6 +9,7 @@ public class main{
 		System.out.println("hello world");
 		
 		
+		D10 dice = new D10();
 		
 		
 	}

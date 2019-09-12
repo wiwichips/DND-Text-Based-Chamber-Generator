@@ -18,13 +18,13 @@
     <javadoc sourcepath="${src}" destdir="${doc.dir}"/>
   </target>
 
-  <target name="compile" depends="doc"
+  <target name="compile" 
         description="compile the source">
     <!-- Compile the Java code from ${src} into ${build} -->
-    <javac includeantruntime="false" srcdir="${src}" destdir="${build}"/>
+    <javac classpath="lib/20190908.jar" includeantruntime="false" srcdir="${src}" destdir="${build}"/>
 
     <!-- Echo the exact command line required for running your program -->
-    <echo message = "To run type: java -cp lib/dnd-20190908.jar cli/Main"/>
+    <echo message = "To run type: java -cp lib/20190908.jar cli/Main"/>
   </target>
 
  
