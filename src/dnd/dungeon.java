@@ -1,6 +1,9 @@
 package dnd;
 
 import dnd.die.*;
+import dnd.models.*;
+import dnd.exceptions.*;
+import java.util.ArrayList;
 
 
 
@@ -11,17 +14,23 @@ public class dungeon{
 	
 	
 	public static void main(String args[]){
-		System.out.println("hello world");
+		D20 d20 = new D20();
+		ChamberShape chamberShape = new ChamberShape();
 		
+		// Generate the Shape of the room
+		chamberShape.setShape(d20.roll());
+		ArrayList list = chamberShape.getExits();
+		// Print the shape, size and 
+		System.out.print(chamberShape.getShape());
+		try{
+			System.out.print(" " + chamberShape.getWidth());
+		}
 		
-		D10 dice = new D10();
+		catch(UnusualShapeException e){
+			
+		}
 		
-		int number = dice.roll();
-		
-		System.out.println("te numebr is ="+number);
-		
-		
-		
+		System.out.println("Exits: " + list.size());
 		
 	}
 
