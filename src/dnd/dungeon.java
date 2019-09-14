@@ -1,8 +1,13 @@
+package dnd;
+
+import dnd.die.*;
+
+
 
 /**
 @author Will Pringle
 */
-public class main{
+public class dungeon{
 	
 	
 	public static void main(String args[]){
@@ -10,6 +15,12 @@ public class main{
 		
 		
 		D10 dice = new D10();
+		
+		int number = dice.roll();
+		
+		System.out.println("te numebr is ="+number);
+		
+		
 		
 		
 	}
