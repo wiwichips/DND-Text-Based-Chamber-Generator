@@ -46,7 +46,19 @@ public class dungeon{
 			System.out.println("No one is watching over the treasure.");
 		}
 
-		// Generate the 
+		// Generate the Trap
+		Trap trap = new Trap();
+		
+		System.out.println("Trap: " + trap.getDescription());
+		
+		// Generate the Stairs
+		Stairs stairs = new Stairs();
+		
+		System.out.println("Stairs: " + stairs.getDescription());
+		
+		// Generate the Monster
+		Monster monster = new Monster();
+		System.out.println("Ahh!!! Oh no look! " + monster.getDescription() + " " + monster.getMinNum() + "-" + monster.getMaxNum());
 	}
 
 
