@@ -1,4 +1,4 @@
-<project name="Dungeon Jar" default="compile" basedir=".">
+<project name="A1" default="compile" basedir=".">
   <description>
     simple example build file
   </description>
@@ -6,32 +6,28 @@
   <property name="src" location="src/"/>
   <property name="build" location="build"/>
   <property name="dist" location="dist"/>
-  <property name="doc.dir" location="doc"/>
+  <property name="doc" location="doc"/>
+  
   <target name="init">
-    <!-- Create the time stamp -->
-    <tstamp/>
-    <!-- Create the build directory structure used by compile -->
-    <mkdir dir="${build}"/>
+    <tstamp/><!-- Create the time stamp -->
+    <mkdir dir="${build}"/>   <!-- Create the build directory -->
   </target>
 
-  <target name="doc" depends="init" description="generate documentation">
-    <javadoc sourcepath="${src}" destdir="${doc.dir}"/>
-  </target>
-
-  <target name="compile" 
+  <target name="compile" depends="init"
         description="compile the source">
     <!-- Compile the Java code from ${src} into ${build} -->
-    <javac classpath="lib/20190908.jar" includeantruntime="false" srcdir="src/dnd" destdir="${build}"/>
+    <javac classpath="lib/dnd-20190914.jar" includeantruntime="false" srcdir="src/dnd" destdir="${build}"/>
 
     <!-- Echo the exact command line required for running your program -->
-    <echo message = "To run type: java -cp lib/20190908.jar:.:build dnd/dungeon"/>
+    <echo message = "To run type: java -cp lib/dnd-20190914.jar:.:build dnd/dungeon"/>
   </target>
 
- 
+   <target name="doc" depends="init" description="generate documentation">
+    <javadoc sourcepath="${src}" destdir="${doc}" excludepackagenames="dnd.model,dnd.die,dnd.cli"/>
+  </target>
 
   <target name="clean"
         description="clean up">
-    <!-- Delete the ${build} and ${dist} directory trees -->
     <delete dir="${build}"/>
     <delete dir="${dist}"/>
   </target>
@@ -42,7 +38,7 @@
 <target name="checkstyle"
         description="Generates a report of code convention violations.">
 
-  <checkstyle config="checkstyle/sun_checks.xml"
+  <checkstyle config="checkstyle/fewerchecks.xml"
               failureProperty="checkstyle.failure"
               failOnViolation="false">
     <fileset dir="src" includes="**/*.java"/>
