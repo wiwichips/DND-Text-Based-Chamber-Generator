@@ -11,6 +11,7 @@
   <target name="init">
     <tstamp/><!-- Create the time stamp -->
     <mkdir dir="${build}"/>   <!-- Create the build directory -->
+	<mkdir dir="${doc}"/>
   </target>
 
   <target name="compile" depends="init"
@@ -19,7 +20,7 @@
     <javac classpath="lib/dnd-20190914.jar" includeantruntime="false" srcdir="src/dnd" destdir="${build}"/>
 
     <!-- Echo the exact command line required for running your program -->
-    <echo message = "To run type: java -cp lib/dnd-20190914.jar:.:build dnd/dungeon"/>
+    <echo message = "To run type: java -cp lib/dnd-20190914.jar:.:build dnd/Dungeon"/>
   </target>
 
    <target name="doc" depends="init" description="generate documentation">
@@ -38,7 +39,7 @@
 <target name="checkstyle"
         description="Generates a report of code convention violations.">
 
-  <checkstyle config="checkstyle/fewerchecks.xml"
+  <checkstyle config="checkstyle/sun_checks.xml"
               failureProperty="checkstyle.failure"
               failOnViolation="false">
     <fileset dir="src" includes="**/*.java"/>
