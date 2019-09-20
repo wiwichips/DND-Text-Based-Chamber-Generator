@@ -183,27 +183,33 @@ public final class Dungeon {
         + shape.getShape());
 
         try {
-            System.out.print("The size is: " + shape.getWidth()
-            + "x" + shape.getLength());
+            System.out.print("The size of the room is: " 
+			+ shape.getWidth() + "x" + shape.getLength() + ".");
         } catch (UnusualShapeException e) {
-            System.out.println("The room is unusual");
+            System.out.println(" The room is unusual");
         }
 
         System.out.println("This room has " + numExits + "exits.");
 
         for (int i = 0; i < numExits; i++) {
-            System.out.println(shape.getExits().get(i).getLocation());
+			System.out.print("Exit #" + (i+1) + " is located at ");
+            System.out.print(shape.getExits().get(i).getLocation());
+			System.out.print(" about ");
             System.out.println(shape.getExits().get(i).getDirection());
         }
+		
+		System.out.println("");
 
-        System.out.println("Contents: " + contents.getDescription());
+        System.out.println("The contents of the room: " 
+		+ contents.getDescription());
 
-        System.out.println("Trap: " + trap.getDescription());
+        System.out.println("The trap is: " + trap.getDescription());
 
-        System.out.println("Treasure: " + treasure.getDescription());
+        System.out.println("The treasure is: " 
+		+ treasure.getDescription());
 
         System.out.println("The treasure is contained in: "
-            + treasure.getContainer());
+        + treasure.getContainer());
 
         try {
             System.out.println("Treasure is protected by: "
