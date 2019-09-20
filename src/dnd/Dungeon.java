@@ -29,14 +29,14 @@ public final class Dungeon {
         ChamberContents contents = new ChamberContents();
         Trap trap = new Trap();
         Treasure treasure = new Treasure();
-		int tempInput = 0;
+        int tempInput = 0;
 
         System.out.println("Welcome to Will's Dungeon Generator!\n"
         + "Please refer to DND appendix a for the rolls.\nYou will"
-		+ " be prompted for rolls to enter for each option of the " 
-		+ "dungeon. Enter a 0 for a random roll. Enjoy!\n\n"
-		+ "Do you want to randomly generate the entire dungeon?");
-		
+        + " be prompted for rolls to enter for each option of the "
+        + "dungeon. Enter a 0 for a random roll. Enjoy!\n\n"
+        + "Do you want to randomly generate the entire dungeon?");
+
         if (getUserInputYesOrNo()) {
             shape.setShape();
             shape.setNumExits();
@@ -52,41 +52,41 @@ public final class Dungeon {
             } catch (NullPointerException e) {
                 shape.setShape();
             }
-            
-			tempInput = getD20Input("Set Number of Exits: ");
-			if (tempInput>0) {
-				shape.setNumExits(tempInput);
-			} else {
-				shape.setNumExits();
-			}
 
-			tempInput = getD20Input("Set Contents: ");
-			if (tempInput>0) {
-				contents.setDescription(tempInput);
-			} else {
-				contents.setDescription();
-			}
+            tempInput = getD20Input("Set Number of Exits: ");
+            if (tempInput > 0) {
+                shape.setNumExits(tempInput);
+            } else {
+                shape.setNumExits();
+            }
 
-			tempInput = getD20Input("Set Trap: ");
-			if (tempInput>0) {
-				trap.setDescription(tempInput);
-			} else {
-				trap.setDescription();
-			}
-			
-			tempInput = getD20Input("Set Treasure container: ");
-			if (tempInput>0) {
-				treasure.setContainer(tempInput);
-			} else {
-				treasure.setContainer();
-			}
-	
-			tempInput = getD20Input("Set Treasure: ");
-			if (tempInput>0) {
-				treasure.setDescription(tempInput);
-			} else {
-				treasure.setDescription();
-			}
+            tempInput = getD20Input("Set Contents: ");
+            if (tempInput > 0) {
+                contents.setDescription(tempInput);
+            } else {
+                contents.setDescription();
+            }
+
+            tempInput = getD20Input("Set Trap: ");
+            if (tempInput > 0) {
+                trap.setDescription(tempInput);
+            } else {
+                trap.setDescription();
+            }
+
+            tempInput = getD20Input("Set Treasure container: ");
+            if (tempInput > 0) {
+                treasure.setContainer(tempInput);
+            } else {
+                treasure.setContainer();
+            }
+
+            tempInput = getD20Input("Set Treasure: ");
+            if (tempInput > 0) {
+                treasure.setDescription(tempInput);
+            } else {
+                treasure.setDescription();
+            }
         }
 
         printDungeon(shape, contents, trap, treasure);
@@ -183,8 +183,8 @@ public final class Dungeon {
         + shape.getShape());
 
         try {
-            System.out.print("The size of the room is: " 
-			+ shape.getWidth() + "x" + shape.getLength() + ".");
+            System.out.print("The size of the room is: "
+            + shape.getWidth() + "x" + shape.getLength() + ".");
         } catch (UnusualShapeException e) {
             System.out.println(" The room is unusual");
         }
@@ -192,21 +192,21 @@ public final class Dungeon {
         System.out.println("This room has " + numExits + "exits.");
 
         for (int i = 0; i < numExits; i++) {
-			System.out.print("Exit #" + (i+1) + " is located at ");
+            System.out.print("Exit #" + (i + 1) + " is located at ");
             System.out.print(shape.getExits().get(i).getLocation());
-			System.out.print(" about ");
+            System.out.print(" about ");
             System.out.println(shape.getExits().get(i).getDirection());
         }
-		
-		System.out.println("");
 
-        System.out.println("The contents of the room: " 
-		+ contents.getDescription());
+        System.out.println("");
+
+        System.out.println("The contents of the room: "
+        + contents.getDescription());
 
         System.out.println("The trap is: " + trap.getDescription());
 
-        System.out.println("The treasure is: " 
-		+ treasure.getDescription());
+        System.out.println("The treasure is: "
+        + treasure.getDescription());
 
         System.out.println("The treasure is contained in: "
         + treasure.getContainer());
