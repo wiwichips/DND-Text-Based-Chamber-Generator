@@ -75,11 +75,10 @@ public class UserInputer {
      * @return input an integer of the user input.
      */
     public int promptD20Input(final String prompt) {
-
         int input = promptInputAsInteger(prompt);
         boolean hasValidInput = false;
-        int lower = 0;
-        int upper = 20;
+        int lower = 0; // the lowest value possible
+        int upper = 20; // highest value possible
 
         do {
 
