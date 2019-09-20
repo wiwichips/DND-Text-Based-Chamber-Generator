@@ -1,6 +1,5 @@
 package dnd;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 import dnd.models.ChamberContents;
 import dnd.models.ChamberShape;
@@ -30,11 +29,14 @@ public final class Dungeon {
         ChamberContents contents = new ChamberContents();
         Trap trap = new Trap();
         Treasure treasure = new Treasure();
+		int tempInput = 0;
 
-        System.out.println("Welcome to Will's Dungeon Generator!"
-        + "Do you want to randomly generate"
-        + "the entire dungeon?");
-
+        System.out.println("Welcome to Will's Dungeon Generator!\n"
+        + "Please refer to DND appendix a for the rolls.\nYou will"
+		+ " be prompted for rolls to enter for each option of the " 
+		+ "dungeon. Enter a 0 for a random roll. Enjoy!\n\n"
+		+ "Do you want to randomly generate the entire dungeon?");
+		
         if (getUserInputYesOrNo()) {
             shape.setShape();
             shape.setNumExits();
@@ -44,19 +46,47 @@ public final class Dungeon {
             treasure.setDescription();
 
         } else {
-			try {
-				shape.setShape(getD20Input("Set Shape: "));
-				
-			} catch (NullPointerException e) {
-				shape.setShape();
-			}
-            shape.setNumExits(getD20Input("Set Number of Exits: "));
-            contents.setDescription(getD20Input("Set Contents: "));
-            trap.setDescription(getD20Input("Set Trap: "));
-            treasure.setContainer(getD20Input("Set treasure"
-            + "container: "));
-            treasure.setDescription(getD20Input("Set treasure: "));
+            try {
+                shape.setShape(getD20Input("Set Shape: "));
 
+            } catch (NullPointerException e) {
+                shape.setShape();
+            }
+            
+			tempInput = getD20Input("Set Number of Exits: ");
+			if (tempInput>0) {
+				shape.setNumExits(tempInput);
+			} else {
+				shape.setNumExits();
+			}
+
+			tempInput = getD20Input("Set Contents: ");
+			if (tempInput>0) {
+				contents.setDescription(tempInput);
+			} else {
+				contents.setDescription();
+			}
+
+			tempInput = getD20Input("Set Trap: ");
+			if (tempInput>0) {
+				trap.setDescription(tempInput);
+			} else {
+				trap.setDescription();
+			}
+			
+			tempInput = getD20Input("Set Treasure container: ");
+			if (tempInput>0) {
+				treasure.setContainer(tempInput);
+			} else {
+				treasure.setContainer();
+			}
+	
+			tempInput = getD20Input("Set Treasure: ");
+			if (tempInput>0) {
+				treasure.setDescription(tempInput);
+			} else {
+				treasure.setDescription();
+			}
         }
 
         printDungeon(shape, contents, trap, treasure);
@@ -74,50 +104,50 @@ public final class Dungeon {
 
     }
 
-	private static int getD20Input(final String prompt) {
-		
-		int userInput = getInputAsInteger(prompt); 
-		boolean hasValidInput = false;
-		int lower = 0;
-		int upper = 20;
-		
-		
-		do {
-			
-			if(userInput >= lower && userInput <= upper) {
-				hasValidInput = true;
-				
-				return userInput;
-			}
-			System.out.println("Please enter a number between 1"
-				+ "and 20 or 0 for a random D20 roll");
-			userInput = getInputAsInteger(prompt);
-		
-		} while(!hasValidInput);
-		
-		return userInput;
-	}
+    private static int getD20Input(final String prompt) {
+
+        int userInput = getInputAsInteger(prompt);
+        boolean hasValidInput = false;
+        int lower = 0;
+        int upper = 20;
+
+
+        do {
+
+            if (userInput >= lower && userInput <= upper) {
+                hasValidInput = true;
+
+                return userInput;
+            }
+            System.out.println("Please enter a number between 1"
+                + "and 20 or 0 for a random D20 roll");
+            userInput = getInputAsInteger(prompt);
+
+        } while (!hasValidInput);
+
+        return userInput;
+    }
 
 
     private static int getInputAsInteger(final String prompt) {
-		int roll = 0;
-		String userInput;
-		
-		
-		do {
-			try {
-				userInput = getUserInput(prompt);
-				roll = Integer.parseInt(userInput);
-				
-				return roll;
-				
-			} catch (Exception e) { // change to NumberFormatException
-				System.out.println("Please enter a number");
-			}
-			
-		} while (true);
-		
-        
+        int roll = 0;
+        String userInput;
+
+
+        do {
+            try {
+                userInput = getUserInput(prompt);
+                roll = Integer.parseInt(userInput);
+
+                return roll;
+
+            } catch (Exception e) { // change to NumberFormatException
+                System.out.println("Please enter a number");
+            }
+
+        } while (true);
+
+
     }
 
     private static boolean getUserInputYesOrNo() {
@@ -131,7 +161,7 @@ public final class Dungeon {
             if (userInput.equals("n") || userInput.equals("N")) {
                 yes = false;
                 hasDecided = true;
-            } else if (userInput.equals("y")||userInput.equals("Y")) {
+            } else if (userInput.equals("y") || userInput.equals("Y")) {
                 yes = true;
                 hasDecided = true;
             }
@@ -144,41 +174,46 @@ public final class Dungeon {
     private static void printDungeon(final ChamberShape shape,
     final ChamberContents contents, final Trap trap,
     final Treasure treasure) {
-		// get the number of exits
-		int numExits = shape.getExits().size();
+        // get the number of exits
+        int numExits = shape.getExits().size();
 
 
-		//print the chamberShape
-		System.out.print("\nThe shape of the room is: " 
-		+ shape.getShape());
-		
-		try {
-			System.out.print("The size is: " + shape.getWidth()
-			+ "x" + shape.getLength());
-		} catch (UnusualShapeException e) {	
-			System.out.println("The room is unusual");
-		}
-		
-		System.out.println("This room has " + numExits + "exits.");
-		
-		System.out.println("Contents: " + contents.getDescription());
-		
-		System.out.println("Trap: " + trap.getDescription());
-		
-		System.out.println("Treasure: " + treasure.getDescription());
-		
-		System.out.println("The treasure is contained in: "
-			+ treasure.getContainer());
-		
-		try {
-			System.out.println("Treasure is protected by: " +
-			treasure.getProtection());
-		} catch (NotProtectedException e) {
-			System.out.println("The treasure is not protected");
-		}
-		
-		
-		
+        //print the chamberShape
+        System.out.print("\nThe shape of the room is: "
+        + shape.getShape());
+
+        try {
+            System.out.print("The size is: " + shape.getWidth()
+            + "x" + shape.getLength());
+        } catch (UnusualShapeException e) {
+            System.out.println("The room is unusual");
+        }
+
+        System.out.println("This room has " + numExits + "exits.");
+
+        for (int i = 0; i < numExits; i++) {
+            System.out.println(shape.getExits().get(i).getLocation());
+            System.out.println(shape.getExits().get(i).getDirection());
+        }
+
+        System.out.println("Contents: " + contents.getDescription());
+
+        System.out.println("Trap: " + trap.getDescription());
+
+        System.out.println("Treasure: " + treasure.getDescription());
+
+        System.out.println("The treasure is contained in: "
+            + treasure.getContainer());
+
+        try {
+            System.out.println("Treasure is protected by: "
+            + treasure.getProtection());
+        } catch (NotProtectedException e) {
+            System.out.println("The treasure is not protected");
+        }
+
+
+
 
     }
 
