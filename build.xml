@@ -5,13 +5,13 @@
   <!-- set global properties for this build -->
   <property name="src" location="src/"/>
   <property name="build" location="build"/>
-  <property name="dist" location="dist"/>
   <property name="doc" location="doc"/>
+  <property name="libfile" value="dnd-20190914.jar"/>
   
   <target name="init">
     <tstamp/><!-- Create the time stamp -->
     <mkdir dir="${build}"/>   <!-- Create the build directory -->
-	<mkdir dir="${doc}"/>
+    <mkdir dir="${doc}" />
   </target>
 
   <target name="compile" depends="init"
@@ -23,8 +23,12 @@
     <echo message = "To run type: java -cp lib/dnd-20190914.jar:.:build dnd/Dungeon"/>
   </target>
 
-   <target name="doc" depends="init" description="generate documentation">
-    <javadoc sourcepath="${src}" destdir="${doc}" excludepackagenames="dnd.model,dnd.die,dnd.cli"/>
+  <target name="doc" depends="init" description="generate documentation">
+    <javadoc  destdir="${doc}" classpath="lib/${libfile}">
+      <fileset dir="${src}" casesensitive="yes" defaultexcludes="yes">
+        <include name="**/*.java"/>
+    </fileset>
+    </javadoc>
   </target>
 
   <target name="clean"
