@@ -1,6 +1,6 @@
 <project name="A1" default="compile" basedir=".">
   <description>
-    simple example build file
+    Buildfile for OOP a1.
   </description>
   <!-- set global properties for this build -->
   <property name="src" location="src/"/>
