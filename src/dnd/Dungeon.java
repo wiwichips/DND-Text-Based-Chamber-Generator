@@ -7,7 +7,7 @@ import dnd.models.Treasure;
 import dnd.exceptions.NotProtectedException;
 import dnd.exceptions.UnusualShapeException;
 
-
+// added a comment for the competency test
 
 /**
 @author Will Pringle
@@ -240,5 +240,3 @@ public final class Dungeon {
         }
     }
 }
-
-
